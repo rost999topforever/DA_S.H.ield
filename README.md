@@ -1,110 +1,265 @@
 ```markdown
 # DA_S.H.ield Framework
 
-**Ultra-minimal POSIX shell framework**
+**Universal POSIX Shell Framework**  
+*Runs everywhere - zero dependencies, pure /bin/sh*
 
 ---
 
 ## 🇷🇺 Русская версия
 
 ### Что это
-Фреймворк для написания скриптов на любом POSIX-совместимом shell. Работает везде, где есть `/bin/sh`.
+Универсальный фреймворк для POSIX-совместимых shell. **Главная фича: работает везде** где есть `/bin/sh`.
 
-### Функции
+### 🎯 Ключевое преимущество
+- **100% POSIX-совместимость** - работает на любом UNIX-подобной системе
+- **Нет зависимостей** - только стандартный shell
+- **Минималистичный** - один файл, легко переносить
+- **Телефон/компьютер** - разрабатывай где угодно
 
-#### Базовые операции
-- `Exo "текст"` - вывод без перевода строки
-- `exo "текст"` - вывод с переводом строки  
-- `readp "подсказка" переменная` - ввод с подсказкой
-- `evl "код"` - выполнение кода (аналог eval)
-- `qt` - выход из скрипта
+### 🚀 Быстрый старт
+```bash
+# Запуск на ЛЮБОЙ системе с /bin/sh
+./da_shield.sh
 
-#### Циклы и условия
-- `fif "условие" "действие_истина" "действие_ложь"` - условие if-else
-- `wh "условие" "действие"` - цикл while
-- `fored "переменная" количество "действие"` - цикл for
-- `counted число` - вывод последовательности чисел
-- `cased значение "шаблон" "действие"` - конструкция case
+# Или в своих скриптах
+source da_shield.sh
+exo "Hello World"
+```
 
-#### Фоновые процессы
-- `spy "команда"` - выполнить в фоне
-- `spy2 "cmd1" "&&" "cmd2"` - последовательность в фоне
-- `spy3 "cmd1" "cmd2"` - пайплайн команд
-- `spy4 "cmd1" "cmd2"` - пайплайн в фоне
-- `job` - показать фоновые процессы
+🔧 Все функции фреймворка
 
-#### Работа с файлами
-- `frd файл` - чтение файла
-- `print "текст" файл` - запись в конец файла
-- `reprint "текст" файл` - перезапись файла
-- `nostar` - список файлов в директории
-- `star "расширение"` - файлы по расширению
-- `gp "шаблон" файл` - поиск текста в файле
+🔄 REPL система
 
-#### Переменные и данные
-- `var переменная число1 операция число2` - математические операции
-- `jmp переменная значение` - установка переменной
-- `udel переменная` - удаление переменной
-- `mass "эл1 эл2 эл3" номер` - доступ к элементу по индексу
-- `steps итерации переменная начальное множитель` - степенные вычисления
+· sREPL - интерактивная оболочка
+· smalPrompt - короткий промпт (имя директории)
+· longPrompt - полный промпт (полный путь)
 
-#### Системные утилиты
-- `HClean` - очистка истории shell
-- `traped` - защита от прерываний
-- `trapERR "код"` - выполнение с подавлением ошибок
-- `func "имя" "код"` - создание именованной функции
-- `DA_SHield` - информация о фреймворке
-- `sREPL` - интерактивная оболочка
+📊 Базовые операции
+
+· Exo "текст" - вывод без перевода строки
+· exo "текст" - вывод с переводом строки
+· readp "подсказка" переменная - ввод с подсказкой
+· evl "код" - выполнение кода
+· qt - выход
+
+🔁 Условия и циклы
+
+· fif "условие" "then" "else" - условие if-else
+· wh "условие" "действие" - цикл while
+· fored "var" count "action" - цикл for
+· counted N - последовательность чисел
+· cased val "pat1" "act1" "pat2" "act2" ... - конструкция case
+
+⚡ Параллельное выполнение
+
+· spy "cmd" - выполнить в фоне
+· spy2 "cmd1" "cmd2" - две команды в фоне
+· spy3 "cmd1" "cmd2" - пайплайн команд
+· spy4 "cmd1" "cmd2" - пайплайн в фоне
+· job - показать фоновые процессы
+
+📁 Работа с файлами
+
+· COPY f1 f2 - копирование файлов
+· COntinued f1 f2 - добавление содержимого
+· fread file - чтение файла (аналог cat)
+· print "text" file - запись в конец файла
+· reprint "text" file - перезапись файла
+· nostar - список всех файлов
+· star расширение - файлы по расширению
+· gp "шаблон" файл - поиск текста в файле
+
+🔢 Переменные и данные
+
+· var x 5 + 3 - математические операции
+· jmp x 10 - установка переменной
+· udel x - удаление переменной
+· mass "a b c" 2 - доступ к элементу массива
+· steps итерации var начальное множитель - степенные вычисления
+
+🏗️ Система классов
+
+· class "инициализация" "метод1" "тело1" "метод2" "тело2" - создание объекта с методами
+
+Пример:
+
+```bash
+class "counter=0" \
+  "inc" "counter=\$(( counter + 1 )); echo \$counter" \
+  "dec" "counter=\$(( counter - 1 )); echo \$counter"
+
+inc  # 1
+inc  # 2
+dec  # 1
+```
+
+🛡️ Системные утилиты
+
+· HClean - очистка истории shell
+· traped - защита от прерываний (INT/TERM)
+· trapERR "cmd" - выполнение без ошибок
+· func "name" "code" - создание функции
+· RANDSTSRT - инициализация случайных чисел
+· DA_SHield - информация о фреймворке
+
+⏱️ Утилиты времени
+
+· slp секунды - обычная задержка
+· SMALLslp время - короткая задержка (десятые)
+· BIGslp время - длинная задержка (десятки секунд)
+
+🎨 Дополнительные функции
+
+· Exoses "var" count "text" - многократный вывод
+· constant var value - постоянная переменная (в фоне)
+· or "cmd1" "cmd2" - выполнение ИЛИ
+· md dir - создание директории
+· PWD - текущая директория
+· PID - ID процесса
+· FI "шаблон" - поиск файлов
+
+💡 Особенности
+
+· Никаких табов - чистый код без лишних отступов
+· Минимализм - только необходимые функции
+· Переносимость - работает на старых и новых системах
+· Простота - легко понять и модифицировать
 
 ---
 
-## 🇺🇸 English Version
+🇺🇸 English Version
 
-### What is this
-Framework for scripting on any POSIX-compatible shell. Works wherever `/bin/sh` exists.
+What is this
 
-### Functions
+Universal framework for POSIX-compatible shells. Main feature: runs everywhere with /bin/sh.
 
-#### Basic Operations
-- `Exo "text"` - print without newline
-- `exo "text"` - print with newline
-- `readp "prompt" variable` - input with prompt
-- `evl "code"` - execute code (eval alias)
-- `qt` - exit script
+🎯 Key Advantage
 
-#### Loops & Conditions
-- `fif "condition" "true_action" "false_action"` - if-else condition
-- `wh "condition" "action"` - while loop
-- `fored "variable" count "action"` - for loop
-- `counted number` - output number sequence
-- `cased value "pattern" "action"` - case construct
+· 100% POSIX-compatible - works on any UNIX-like system
+· Zero dependencies - only standard shell required
+· Minimalistic - single file, easy to port
+· Mobile/desktop - develop anywhere
 
-#### Background Processes
-- `spy "command"` - run in background
-- `spy2 "cmd1" "&&" "cmd2"` - sequence in background
-- `spy3 "cmd1" "cmd2"` - command pipeline
-- `spy4 "cmd1" "cmd2"` - pipeline in background
-- `job` - show background jobs
+🚀 Quick Start
 
-#### File Operations
-- `frd file` - read file
-- `print "text" file` - append to file
-- `reprint "text" file` - overwrite file
-- `nostar` - list directory contents
-- `star "extension"` - files by extension
-- `gp "pattern" file` - search text in file
+```bash
+# Run on ANY system with /bin/sh
+./da_shield.sh
 
-#### Variables & Data
-- `var variable number1 operation number2` - math operations
-- `jmp variable value` - set variable
-- `udel variable` - unset variable
-- `mass "item1 item2 item3" index` - access element by index
-- `steps iterations variable initial multiplier` - exponential calculations
+# Or in your scripts
+source da_shield.sh
+exo "Hello World"
+```
 
-#### System Utilities
-- `HClean` - clear shell history
-- `traped` - interrupt protection
-- `trapERR "code"` - execute with error suppression
-- `func "name" "code"` - create named function
-- `DA_SHield` - framework info
-- `sREPL` - interactive shell
+🔧 All Framework Functions
+
+🔄 REPL System
+
+· sREPL - interactive shell
+· smalPrompt - short prompt (directory name)
+· longPrompt - full prompt (full path)
+
+📊 Basic Operations
+
+· Exo "text" - print without newline
+· exo "text" - print with newline
+· readp "prompt" variable - input with prompt
+· evl "code" - execute code
+· qt - exit
+
+🔁 Conditions & Loops
+
+· fif "condition" "then" "else" - if-else condition
+· wh "condition" "action" - while loop
+· fored "var" count "action" - for loop
+· counted N - number sequence
+· cased val "pat1" "act1" "pat2" "act2" ... - case construct
+
+⚡ Parallel Execution
+
+· spy "cmd" - run in background
+· spy2 "cmd1" "cmd2" - two commands in background
+· spy3 "cmd1" "cmd2" - command pipeline
+· spy4 "cmd1" "cmd2" - pipeline in background
+· job - show background jobs
+
+📁 File Operations
+
+· COPY f1 f2 - copy files
+· COntinued f1 f2 - append content
+· fread file - read file (cat analog)
+· print "text" file - append to file
+· reprint "text" file - overwrite file
+· nostar - list all files
+· star extension - files by extension
+· gp "pattern" file - search text in file
+
+🔢 Variables & Data
+
+· var x 5 + 3 - math operations
+· jmp x 10 - set variable
+· udel x - unset variable
+· mass "a b c" 2 - array element access
+· steps iterations var initial multiplier - exponential calculations
+
+🏗️ Class System
+
+· class "initialization" "method1" "body1" "method2" "body2" - create object with methods
+
+Example:
+
+```bash
+class "counter=0" \
+  "inc" "counter=\$(( counter + 1 )); echo \$counter" \
+  "dec" "counter=\$(( counter - 1 )); echo \$counter"
+
+inc  # 1
+inc  # 2
+dec  # 1
+```
+
+🛡️ System Utilities
+
+· HClean - clear shell history
+· traped - interrupt protection (INT/TERM)
+· trapERR "cmd" - execute without errors
+· func "name" "code" - create function
+· RANDSTSRT - random numbers initialization
+· DA_SHield - framework info
+
+⏱️ Time Utilities
+
+· slp seconds - normal delay
+· SMALLslp time - short delay (tenths)
+· BIGslp time - long delay (tens of seconds)
+
+🎨 Additional Functions
+
+· Exoses "var" count "text" - multiple output
+· constant var value - constant variable (in background)
+· or "cmd1" "cmd2" - OR execution
+· md dir - create directory
+· PWD - current directory
+· PID - process ID
+· FI "pattern" - find files
+
+💡 Features
+
+· No tabs - clean code without indentation
+· Minimalism - only essential functions
+· Portability - works on old and new systems
+· Simplicity - easy to understand and modify
+
+---
+
+🌟 Supported Systems
+
+· Linux (any distribution)
+· BSD (FreeBSD, OpenBSD, NetBSD)
+· macOS
+· Android (Termux)
+· Embedded systems
+· Old UNIX systems
+
+No bash required - pure POSIX shell only
