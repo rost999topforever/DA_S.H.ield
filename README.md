@@ -227,6 +227,28 @@ BIGslp() {
 sleep $(( $1 * 10 ))
 }
 
+stop() {
+break
+}
+
+moreexo() {
+moreexovar=$1
+while [ $moreexovar -gt 0 ] ; do
+echo "$2"
+moreexovar=$(( $moreexovar - 1 ))
+done
+unset moreexovar
+}
+
+moreExo() {
+moreExovar=$1
+while [ $moreExovar -gt 0 ] ; do
+printf "%s" "$2"
+moreExovar=$(( $moreExovar - 1 ))
+done
+unset moreExovar
+}
+
 exoPWD() {
 echo "$PWD"
 }
@@ -424,6 +446,45 @@ isdir() {
 
 spyRun() {
  [ -f "$1" ] && . "$1" &
+}
+
+chIFS() {
+NIFS=0
+OLDIFS="$IFS"
+IFS="$1"
+sleep $2  2>/dev/null ; NIFS=$(( $NIFS + 1 )) || continue 
+if [ $NIFS -gt 0 ] ; then IFS=$OLDIFS ; fi
+unset NIFS OLDIFS
+}
+
+merge() {
+while [ $# -gt 0 ] ; do
+eval "$1='$2$3'"
+shift 3
+done
+}
+
+paint() {
+while true ; do
+read paintvar
+if [ $paintvar = "" ] ; then
+break
+fi
+done
+unset paintvar
+}
+
+Yn() {
+while true ; do 
+printf "Y/n:"
+read YNvar
+if [ $YNvar = "Y" ] ; then
+continue
+else
+break
+fi
+done
+unset YNvar
 }
 
 sREPL "RANDOM"
