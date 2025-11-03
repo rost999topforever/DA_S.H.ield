@@ -1,58 +1,86 @@
-DA_S.H.ield
-POSIX shell framework with 83 functions
+# DA_S.H.ield
+
+**POSIX shell framework with 83 functions**
+
 Фреймворк для POSIX shell с 83 функциями
-🛡️ About / О проекте
-EN: DA_S.H.ield is a lightweight framework that extends POSIX shell capabilities. It adds arrays, random numbers, object-oriented syntax, and interactive REPL - all in pure /bin/sh without dependencies.
-RU: DA_S.H.ield - легковесный фреймворк расширяющий возможности POSIX shell. Добавляет массивы, случайные числа, ООП-синтаксис и интерактивный REPL - всё на чистом /bin/sh без зависимостей.
-✨ Key Features / Ключевые возможности
-EN:
-🎯 Arrays - via set -- for POSIX compatibility
-🎲 Random numbers - without $RANDOM (works in dash/sh)
-📝 Multi-line input - reader() function for interactive coding
-🎨 ASCII drawing - paint() for terminal art
-🔒 Constants - protected variables via background loops
-🔐 Password protection - anonim() for script security
-🎭 OOP syntax - class-like structures
-🚀 Background execution - spy-family functions
-🌈 Colored output - ANSI escape codes support
-RU:
-🎯 Массивы - через set -- для POSIX совместимости
-🎲 Случайные числа - без $RANDOM (работает в dash/sh)
-📝 Многострочный ввод - функция reader() для интерактивного кодинга
-🎨 ASCII рисование - paint() для терминального арта
-🔒 Константы - защищённые переменные через фоновые циклы
-🔐 Защита паролем - anonim() для безопасности скриптов
-🎭 ООП синтаксис - класс-подобные структуры
-🚀 Фоновое выполнение - семейство spy-функций
-🌈 Цветной вывод - поддержка ANSI escape-кодов
-📚 Function Categories / Категории функций
-Variables / Переменные
-var(name, value) - assign variable
-varP(var) - increment (++)
-varM(var) - decrement (--)
-constant(var, val, interval) - protected constant
-jmp(var, val) - jump/assign
-udel(var) - unset variable
-Output / Вывод
-exo(text) - echo with newline
-Exo(text) - printf without newline
-moreexo(n, text) - repeat echo N times
-Cexo(color, text) - colored output
-Arrays / Массивы
-mass(string) - create array from string
-massexo(array, index) - get element by index
-massfored(array, cmd) - foreach loop
-Loops / Циклы
-fored(start, end, cmd) - for loop
-wh(condition, cmd) - while loop
-counted(start, end) - print numbers
-Conditions / Условия
-fif(cond, then, else) - inline if-else
-cased(val, c1, cmd1...) - case statement
-equal(a, b) - string comparison
-ge/gt/le/lt - numeric comparisons
-Classes / Классы
-EN:
+
+---
+
+## 🛡️ About / О проекте
+
+**EN:** DA_S.H.ield is a lightweight framework that extends POSIX shell capabilities. It adds arrays, random numbers, object-oriented syntax, and interactive REPL - all in pure `/bin/sh` without dependencies.
+
+**RU:** DA_S.H.ield - легковесный фреймворк расширяющий возможности POSIX shell. Добавляет массивы, случайные числа, ООП-синтаксис и интерактивный REPL - всё на чистом `/bin/sh` без зависимостей.
+
+---
+
+## ✨ Key Features / Ключевые возможности
+
+**EN:**
+- 🎯 **Arrays** - via `set --` for POSIX compatibility
+- 🎲 **Random numbers** - without `$RANDOM` (works in dash/sh)
+- 📝 **Multi-line input** - `reader()` function for interactive coding
+- 🎨 **ASCII drawing** - `paint()` for terminal art
+- 🔒 **Constants** - protected variables via background loops
+- 🔐 **Password protection** - `anonim()` for script security
+- 🎭 **OOP syntax** - class-like structures
+- 🚀 **Background execution** - spy-family functions
+- 🌈 **Colored output** - ANSI escape codes support
+
+**RU:**
+- 🎯 **Массивы** - через `set --` для POSIX совместимости
+- 🎲 **Случайные числа** - без `$RANDOM` (работает в dash/sh)
+- 📝 **Многострочный ввод** - функция `reader()` для интерактивного кодинга
+- 🎨 **ASCII рисование** - `paint()` для терминального арта
+- 🔒 **Константы** - защищённые переменные через фоновые циклы
+- 🔐 **Защита паролем** - `anonim()` для безопасности скриптов
+- 🎭 **ООП синтаксис** - класс-подобные структуры
+- 🚀 **Фоновое выполнение** - семейство spy-функций
+- 🌈 **Цветной вывод** - поддержка ANSI escape-кодов
+
+---
+
+## 📚 Function Categories / Категории функций
+
+### Variables / Переменные
+
+- `var(name, value)` - assign variable
+- `varP(var)` - increment (++)
+- `varM(var)` - decrement (--)
+- `constant(var, val, interval)` - protected constant
+- `jmp(var, val)` - jump/assign
+- `udel(var)` - unset variable
+
+### Output / Вывод
+
+- `exo(text)` - echo with newline
+- `Exo(text)` - printf without newline
+- `moreexo(n, text)` - repeat echo N times
+- `Cexo(color, text)` - colored output
+
+### Arrays / Массивы
+
+- `mass(string)` - create array from string
+- `massexo(array, index)` - get element by index
+- `massfored(array, cmd)` - foreach loop
+
+### Loops / Циклы
+
+- `fored(start, end, cmd)` - for loop
+- `wh(condition, cmd)` - while loop
+- `counted(start, end)` - print numbers
+
+### Conditions / Условия
+
+- `fif(cond, then, else)` - inline if-else
+- `cased(val, c1, cmd1...)` - case statement
+- `equal(a, b)` - string comparison
+- `ge/gt/le/lt` - numeric comparisons
+
+### Classes / Классы
+
+**EN:**
+```sh
 # Define class with constructor and methods
 class "name='Player'; health=100" \
     "attack" "health=\$(( \$health - 10 )); exo 'Health: \$health'" \
