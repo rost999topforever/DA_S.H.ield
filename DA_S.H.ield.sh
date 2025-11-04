@@ -508,7 +508,7 @@ road() {
 timeRoad=$1
 shift
 while [ $# -gt 0 ] ; do
-eval "$2"
+eval "$1"
 sleep $timeRoad
 shift
 done
@@ -528,10 +528,10 @@ whoami
 }
 
 oldvar() {
-saveoldvar="\$$1"
+eval "saveoldvar='\$$1'"
 eval "$1=$2"
 sleep  $3 2>/dev/null || sleep 10
-eval "$1=$saveoldvar"
+eval "$1=\$saveoldvar"
 unset saveoldvar
 }
 
