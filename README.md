@@ -1,317 +1,610 @@
-# DA_S.H.ield
+#!/bin/sh
 
-**POSIX shell framework with 83 functions**
+DAshieldprompt="$( basename $PWD )"
+DASHELDPROMPT=0
 
-Фреймворк для POSIX shell с 83 функциями
+counted() {
+continedSTART="$1"
+continedEND="$2"
+while [ "$continedSTART" -le "$continedEND" ]; do
+printf "%s\n" "$continedSTART"
+continedSTART=$(( $continedSTART + 1))
+done
+}
 
----
+RANDSTART() {
+RANDOM=$(( $(date +%s) % $$ ))
+}
 
-## 🛡️ About / О проекте
+RANDOMname() {
+eval "$1=$(( $(date +%s) % $$ ))"
+}
 
-**EN:** DA_S.H.ield is a lightweight framework that extends POSIX shell capabilities. It adds arrays, random numbers, object-oriented syntax, and interactive REPL - all in pure `/bin/sh` without dependencies.
+evl() {
+eval "$1"
+}
 
-**RU:** DA_S.H.ield - легковесный фреймворк расширяющий возможности POSIX shell. Добавляет массивы, случайные числа, ООП-синтаксис и интерактивный REPL - всё на чистом `/bin/sh` без зависимостей.
+constant() {
+while true ; do 
+eval "$1=$2"
+sleep $3  2>/dev/null || sleep 0.5
+done &
+}
 
----
+Exo() {
+printf "%s" "$1"
+}
 
-## ✨ Key Features / Ключевые возможности
+exo() {
+echo "$1"
+}
 
-**EN:**
-- 🎯 **Arrays** - via `set --` for POSIX compatibility
-- 🎲 **Random numbers** - without `$RANDOM` (works in dash/sh)
-- 📝 **Multi-line input** - `reader()` function for interactive coding
-- 🎨 **ASCII drawing** - `paint()` for terminal art
-- 🔒 **Constants** - protected variables via background loops
-- 🔐 **Password protection** - `anonim()` for script security
-- 🎭 **OOP syntax** - class-like structures
-- 🚀 **Background execution** - spy-family functions
-- 🌈 **Colored output** - ANSI escape codes support
+massexo() {
+set -- $1
+eval "echo '\$$2'"
+}
 
-**RU:**
-- 🎯 **Массивы** - через `set --` для POSIX совместимости
-- 🎲 **Случайные числа** - без `$RANDOM` (работает в dash/sh)
-- 📝 **Многострочный ввод** - функция `reader()` для интерактивного кодинга
-- 🎨 **ASCII рисование** - `paint()` для терминального арта
-- 🔒 **Константы** - защищённые переменные через фоновые циклы
-- 🔐 **Защита паролем** - `anonim()` для безопасности скриптов
-- 🎭 **ООП синтаксис** - класс-подобные структуры
-- 🚀 **Фоновое выполнение** - семейство spy-функций
-- 🌈 **Цветной вывод** - поддержка ANSI escape-кодов
+massfored() {
+set -- $1
+while [ $# -gt 0 ] ; do
+eval "$2"
+shift
+done
+}
 
----
+reader() {
+READERCOUNT=1
+READERRANDOM=$(( $(date +%s) % $$ ))
+trap "rm 'TIMEREADERFILE$READERRANDOM.sh' ; unset READERC ;unset filename ;unset READERRANDOM ; break" INT TERM HUP EXIT
+while true ; do
+printf "&+[$READERCOUNT]::"
+read READERC
+if [ "$READERC" = "reader.stop" ] ; then
+. "TIMEREADERFILE$READERRANDOM.sh"
+rm "TIMEREADERFILE$READERRANDOM.sh"
+unset READERC
+unset READERRANDOM
+break
+elif [ "$READERC" = "reader.save" ] ; then
+read filename
+cat "TIMEREADERFILE$READERRANDOM.sh" > "$filename.sh"
+rm "TIMEREADERFILE$READERRANDOM.sh"
+unset READERC
+unset filename
+unset READERRANDOM
+break
+else
+READERCOUNT=$(( $READERCOUNT + 1 ))
+printf "%s\n" "$READERC" >> "TIMEREADERFILE$READERRANDOM.sh"
+fi 
+done
+}
 
-## 📚 Function Categories / Категории функций
+mass() {
+set -- $1
+}
 
-### Variables / Переменные
+varP() {
+eval "$1=$(( $1 + 1 ))"
+}
 
-- `var(name, value)` - assign variable
-- `varP(var)` - increment (++)
-- `varM(var)` - decrement (--)
-- `constant(var, val, interval)` - protected constant
-- `jmp(var, val)` - jump/assign
-- `udel(var)` - unset variable
+varM() {
+eval "$1=$(( $1 - 1 ))"
+}
 
-### Output / Вывод
+fored() {
+foredSTART="$1"
+foredEND="$2"
+while [ "$foredSTART" -le "$foredEND" ]; do
+eval "$3"
+foredSTART=$(( $foredSTART + 1))
+done
+}
 
-- `exo(text)` - echo with newline
-- `Exo(text)` - printf without newline
-- `moreexo(n, text)` - repeat echo N times
-- `Cexo(color, text)` - colored output
+Exoses() {
+exosesSTART="$1"
+exosesEND="$2"
+while [ "$exosesSTART" -le "$exosesEND" ]; do
+printf "%s\n" "$3"
+exosesSTART=$(( $exosesSTART + 1))
+done
+}
 
-### Arrays / Массивы
+class() {
+eval "$1"
+shift 
+while [ $# -ge 2 ]; do
+eval "$1() { $2 }"
+shift 2
+done
+}
 
-- `mass(string)` - create array from string
-- `massexo(array, index)` - get element by index
-- `massfored(array, cmd)` - foreach loop
+fif() {
+if eval [ "$1" ] ; then
+eval "$2"
+else
+eval "$3"
+fi
+}
 
-### Loops / Циклы
+COPY() {
+cat "$1" > "$2"
+}
 
-- `fored(start, end, cmd)` - for loop
-- `wh(condition, cmd)` - while loop
-- `counted(start, end)` - print numbers
+COntinued() {
+cat "$1" >> "$2"
+}
 
-### Conditions / Условия
+wh() {
+while eval [ "$1" ] ; do
+eval "$2"
+done
+}
 
-- `fif(cond, then, else)` - inline if-else
-- `cased(val, c1, cmd1...)` - case statement
-- `equal(a, b)` - string comparison
-- `ge/gt/le/lt` - numeric comparisons
+traped() {
+trap "" INT TERM 
+}
 
-### Classes / Классы
+md() {
+mkdir "$1"
+}
 
-**EN:**
-```sh
-# Define class with constructor and methods
-class "name='Player'; health=100" \
-    "attack" "health=\$(( \$health - 10 )); exo 'Health: \$health'" \
-    "heal" "health=\$(( \$health + 20 )); exo 'Healed! Health: \$health'"
+readp() {
+printf "%s" "$1"
+read $2
+}
 
-# Use methods
-attack
-attack
-heal
-RU:
-# Определить класс с конструктором и методами
-class "имя='Игрок'; здоровье=100" \
-    "атака" "здоровье=\$(( \$здоровье - 10 )); exo 'Здоровье: \$здоровье'" \
-    "лечение" "здоровье=\$(( \$здоровье + 20 )); exo 'Вылечен! Здоровье: \$здоровье'"
+prog() {
+echo "$1" > "$2"
+}
 
-# Использовать методы
-атака
-атака
-лечение
-Files / Файлы
-COPY(src, dst) - copy file
-frd(file) - read file
-prog(text, file) - write to file
-isfile/isdir(path) - check existence
-Interactive / Интерактив
-sREPL(var) - start REPL shell
-reader() - multi-line input mode
-paint() - ASCII art drawing
-readp(prompt, var) - read with prompt
-Background / Фоновое выполнение
-spy(cmd) - run in background
-spy2(cmd1, cmd2) - cmd1 && cmd2 in background
-spy3(cmd1, cmd2) - cmd1 | cmd2
-spy4(cmd1, cmd2) - piped background
-💡 Usage Examples / Примеры использования
-Random Numbers / Случайные числа
-EN:
-RANDSTART              # Initialize global RANDOM
-exo $RANDOM           # Print random number
+proger() {
+echo "$1" >> "$2"
+}
 
-RANDOMname myvar      # Store random in variable
-exo $myvar
-RU:
-RANDSTART              # Инициализировать глобальный RANDOM
-exo $RANDOM           # Вывести случайное число
+print() {
+printf "%s" "$1" >> $2
+}
 
-RANDOMname мояперем    # Сохранить случайное в переменную
-exo $мояперем
-Multi-line Input / Многострочный ввод
-EN:
-reader
-&+[1]:: var x 10
-&+[2]:: fored 1 $x "exo 'Line \$foredSTART'"
-&+[3]:: reader.stop    # Execute code
-RU:
-reader
-&+[1]:: var x 10
-&+[2]:: fored 1 $x "exo 'Строка \$foredSTART'"
-&+[3]:: reader.stop    # Выполнить код
-Protected Constants / Защищённые константы
-EN:
-constant CONFIG_PATH "/etc/myapp" 0.5
-# Variable resets every 0.5 seconds
-var CONFIG_PATH "/tmp"
-slp 1
-exo $CONFIG_PATH  # Still "/etc/myapp"!
-RU:
-constant ПУТЬ_КОНФИГА "/etc/myapp" 0.5
-# Переменная сбрасывается каждые 0.5 секунды
-var ПУТЬ_КОНФИГА "/tmp"
-slp 1
-exo $ПУТЬ_КОНФИГА  # Всё ещё "/etc/myapp"!
-Arrays / Массивы
-EN:
-# Create array from space-separated string
-mass "apple orange banana"
-exo $1  # apple
-exo $2  # orange
-exo $3  # banana
+reprint() {
+printf "%s" "$1" > $2
+}
 
-# Get element by index
-massexo "red green blue" 2  # green
+DA_SHield() {
+echo "DA_S.H.ield by Rost999"
+echo "_ --------------_"
+echo "_  ##  ##  ##   _"
+echo "_  ####@#####   _"
+echo "_   ##@@@##     _"
+echo "_    ##@##      _"
+echo "_     ###       _"
+echo "_      #        _"
+echo "----------------"
+echo "DA_S.H.ield GPL 3.0"
+}
 
-# Iterate over array
-massfored "one two three" "exo 'Item: \$1'"
-RU:
-# Создать массив из строки с пробелами
-mass "яблоко апельсин банан"
-exo $1  # яблоко
-exo $2  # апельсин
-exo $3  # банан
+sREPL() {
+while true ; do
+eval "$1=$(( $(date +%s) % $$))" 2>/dev/null || eval "RANDOM=$(( $(date +%s) % $$))"
+if [ $DASHELDPROMPT = 0 ] ; then
+DAshieldprompt="$( basename $PWD )"
+else
+DAshieldprompt="$PWD"
+fi
+printf "&+[%s]::" "$DAshieldprompt"
+read DASHELDEVAL
+eval "$DASHELDEVAL"
+done
+}
 
-# Получить элемент по индексу
-massexo "красный зелёный синий" 2  # зелёный
+trapERR(){ 
+eval "$1 2>/dev/null" 
+}
 
-# Итерация по массиву
-massfored "один два три" "exo 'Элемент: \$1'"
-Loops / Циклы
-EN:
-# Simple for loop
-fored 1 5 "exo 'Count: \$foredSTART'"
+SMALLslp() {
+sleep $(( $1 / 10 ))
+}
 
-# While loop with condition
-var counter 0
-wh "\$counter -lt 3" "exo 'Counter: \$counter'; varP counter"
+smallPrompt() {
+DAshieldprompt="$( basename $PWD )"
+DASHELDPROMPT=0
+}
 
-# Repeat text N times
-moreexo 3 "Hello!"
-RU:
-# Простой цикл for
-fored 1 5 "exo 'Счёт: \$foredSTART'"
+longPrompt() {
+DAshieldprompt="$PWD"
+DASHELDPROMPT=1
+}
 
-# Цикл while с условием
-var счётчик 0
-wh "\$счётчик -lt 3" "exo 'Счётчик: \$счётчик'; varP счётчик"
+math() {
+eval "echo $(( $1 $2 $3 ))"
+}
 
-# Повторить текст N раз
-moreexo 3 "Привет!"
-Conditions / Условия
-EN:
-# Inline if-else
-var age 18
-fif "\$age -ge 18" "exo 'Adult'" "exo 'Minor'"
+reseted() {
+set -- ""
+}
 
-# Case statement
-var cmd "help"
-cased $cmd \
-    "help" "exo 'Show help'" \
-    "exit" "qt" \
-    "run" "exo 'Running...'" \
-    "*" "exo 'Unknown command'"
-RU:
-# Условие в одну строку
-var возраст 18
-fif "\$возраст -ge 18" "exo 'Взрослый'" "exo 'Несовершеннолетний'"
+or() {
+eval "$1 || $2"
+}
 
-# Case оператор
-var команда "помощь"
-cased $команда \
-    "помощь" "exo 'Показать помощь'" \
-    "выход" "qt" \
-    "запуск" "exo 'Запускаю...'" \
-    "*" "exo 'Неизвестная команда'"
-Background Execution / Фоновое выполнение
-EN:
-# Run in background
-spy "slp 5; exo 'Done!'"
+slp() {
+sleep $1
+}
 
-# Conditional background
-spy2 "equal \$USER 'root'" "exo 'Admin mode'"
+BIGslp() {
+sleep $(( $1 * 10 ))
+}
 
-# Piped execution
-spy3 "frd data.txt" "gp 'error'"
+stop() {
+break
+}
 
-# Piped background
-spy4 "counted 1 100" "gp '5'"
-RU:
-# Запустить в фоне
-spy "slp 5; exo 'Готово!'"
+moreexo() {
+moreexovar=$1
+while [ $moreexovar -gt 0 ] ; do
+echo "$2"
+moreexovar=$(( $moreexovar - 1 ))
+done
+unset moreexovar
+}
 
-# Условное выполнение в фоне
-spy2 "equal \$USER 'root'" "exo 'Режим администратора'"
+moreExo() {
+moreExovar=$1
+while [ $moreExovar -gt 0 ] ; do
+printf "%s" "$2"
+moreExovar=$(( $moreExovar - 1 ))
+done
+unset moreExovar
+}
 
-# Выполнение с pipe
-spy3 "frd данные.txt" "gp 'ошибка'"
+exoPWD() {
+echo "$PWD"
+}
 
-# Pipe в фоне
-spy4 "counted 1 100" "gp '5'"
-ASCII Art / ASCII рисование
-EN:
-paint
-  ***
- *****
-*******
-  |
-  |
+exoPID() {
+echo "$$"
+}
 
-# Press Enter on empty line to exit
-RU:
-paint
-  ***
- *****
-*******
-  |
-  |
 
-# Нажмите Enter на пустой строке для выхода
-Colors / Цвета
-EN:
-# ANSI color codes
-Cexo 31 "Red text"      # 31 = red
-Cexo 32 "Green text"    # 32 = green
-Cexo 33 "Yellow text"   # 33 = yellow
-Cexo 34 "Blue text"     # 34 = blue
+spy() {
+eval "$1" &
+}
 
-# Colored prompt
-Creadp 36 "Enter name: " username
-exo "Hello, $username!"
-RU:
-# ANSI цветовые коды
-Cexo 31 "Красный текст"   # 31 = красный
-Cexo 32 "Зелёный текст"   # 32 = зелёный
-Cexo 33 "Жёлтый текст"    # 33 = жёлтый
-Cexo 34 "Синий текст"     # 34 = синий
+spy2() {
+eval "$1" && eval "$3" &
+}
 
-# Цветной промпт
-Creadp 36 "Введите имя: " имяпользователя
-exo "Привет, $имяпользователя!"
-🎯 Use Cases / Применение
-EN:
-Embedded systems - routers, IoT devices with only /bin/sh
-Minimal containers - Alpine, BusyBox, scratch images
-Recovery environments - initramfs, rescue shells
-Educational purposes - learning shell scripting
-Quick prototyping - interactive development
-RU:
-Встраиваемые системы - роутеры, IoT устройства с только /bin/sh
-Минимальные контейнеры - Alpine, BusyBox, scratch образы
-Recovery окружения - initramfs, rescue shells
-Образовательные цели - изучение shell скриптинга
-Быстрое прототипирование - интерактивная разработка
-⚙️ Requirements / Требования
-EN:
-POSIX-compatible shell (/bin/sh, dash, ash, busybox sh)
-Basic utilities: date, cat, grep, find
-No bash/zsh required
-RU:
-POSIX-совместимый shell (/bin/sh, dash, ash, busybox sh)
-Базовые утилиты: date, cat, grep, find
-Не требуется bash/zsh
-📜 License / Лицензия
-GPL-3.0 License
-👤 Author / Автор
-Rost999
+spy3() {
+eval "$1" | eval "$2" 
+}
+
+jmp() {
+eval "$1=$2"
+}
+
+udel() {
+unset "$1"
+}
+
+cased() {
+case $1 in 
+"$2")
+eval "$3"
+;;
+"$4")
+eval "$5"
+;;
+"$6") 
+eval "$7"
+;;
+"$8")
+eval "$9"
+;;
+*)
+shift
+eval "$9"
+esac
+}
+
+steps() {
+stepsSTART="$1"
+stepsEND="$2"
+while [ "$stepsSTART" -le "$stepsEND" ]; do
+eval "$3=\$(( \$$3 * $4 ))"
+stepsSTART=$(( $stepsSTART + 1))
+done
+}
+
+spy4() {
+eval "$1" | eval "$2" &
+}
+
+func() {
+eval "$1(){ $2 }"
+}
+
+nostar() {
+echo *
+}
+
+frd() {
+cat "$1"
+}
+
+gp() {
+grep "$1" "$2"
+}
+
+star() {
+echo *.$1
+}
+
+qt() {
+exit
+}
+
+FI() {
+find -name "$1"
+}
+
+Cexo() {
+printf "\033[$1m%s\033[0m\n" "$2"
+}
+
+Cprint() {
+printf "\033[$1m%s\033[0m" "$2"
+}
+
+Creadp() {
+printf "\033[$1m%s\033[0m" "$2"
+read $3
+}
+
+shBANG() {
+DASHELDC=$( cat "$1" )
+echo "#!/bin/sh" > "$1"
+echo "$DASHELDC" >> "$1"
+unset DASHELDC
+}
+
+pmc() {
+eval "$1=$(( $2 $3 $4 ))"
+}
+
+var() {
+eval  "$1=$2"
+}
+
+PIPE() {
+IFS=';'
+set -- $1
+while [ $# -gt 0 ]; do
+eval "$1"
+if [ $? -ne 0 ]; then
+break
+fi
+shift
+done
+unset IFS
+}
+
+NOPIPE() {
+IFS=';'
+set -- $1
+while [ $# -gt 0 ]; do
+eval "$1"
+if [ $? -eq 0 ]; then
+break
+fi
+shift
+done
+unset IFS
+}
+
+RUN() {
+eval "sh $1"
+}
+
+DOit() {
+. "$1"
+}
+
+GoTo() {
+eval "cd $1"
+}
+
+and() {
+eval "$1 && $2"
+}
+
+ge() {
+[ $1 -ge $2 ]
+}
+
+gt() {
+[ $1 -gt $2 ]
+}
+
+le() {
+[ $1 -le $2 ]
+}
+
+lt() {
+[ $1 -lt $2 ]
+}
+
+equal() {
+[ $1 = $2 ]
+}
+
+anonim() {
+TIMECATVAR=$( cat "$1" )
+printf "#!/bin/sh \n" > "$1.sh"
+echo "read codeforfile ; if [ '$codeforfile' = '$2' ] ; then eval '$TIMECATVAR' || echo '$TIMECATVAR'  else  exit ; fi " >> "$1.sh"
+unset TIMECATVAR
+}
+
+isfile() {
+[ -f "$1" ]
+}
+
+isdir() {
+[ -d "$1" ]
+}
+
+spyRun() {
+ [ -f "$1" ] && . "$1" &
+}
+
+chIFS() {
+NIFS=0
+OLDIFS="$IFS"
+IFS="$1"
+sleep $2  2>/dev/null ; NIFS=$(( $NIFS + 1 )) || continue 
+if [ $NIFS -gt 0 ] ; then IFS=$OLDIFS ; fi
+unset NIFS OLDIFS
+}
+
+merge() {
+while [ $# -gt 0 ] ; do
+eval "$1='$2$3'"
+shift 3
+done
+}
+
+paint() {
+while true ; do
+read paintvar
+if [ "$paintvar" = "" ] ; then
+break
+fi
+done
+unset paintvar
+}
+
+Yn() {
+while true ; do 
+printf "Y/n:"
+read YNvar
+if [ "$YNvar" = "Y" ] ; then
+continue
+else
+break
+fi
+done
+unset YNvar
+}
+
+compil() {
+eval "$( cat '$1' )"
+}
+
+
+
+road() {
+timeRoad=$1
+shift
+while [ $# -gt 0 ] ; do
+eval "$1"
+sleep $timeRoad
+shift
+done
+unset timeRoad
+}
+
+savetime() {
+eval "$1=$(date +%s)"
+}
+
+stonewrite() {
+echo "#$1" >> "$2"
+}
+
+me() {
+whoami
+}
+
+oldvar() {
+eval "saveoldvar='\$$1'"
+eval "$1=$2"
+sleep  $3 2>/dev/null || sleep 10
+eval "$1=\$saveoldvar"
+unset saveoldvar
+}
+
+prinTAR() {
+cat "$1" "$2" > "$3"
+}
+
+roast() {
+eval "$3=$(( $2 + $1 )) 2>/dev/null || $3='$2$1'"
+}
+
+unroast() {
+eval "$1=$(( $3 / 2 )) && $2=$(( $3 / 2 )) || $1='$3' && $2='$3'"
+}
+
+sprint() {
+while [ $# -gt 0 ] ; do
+eval "$1;$2;$3;$4;$5;$6;$7;$8;$9"
+shift 9
+done
+}
+
+objected() {
+echo "#$1" > "$2.objDSH"
+}
+
+coded() {
+echo "$1" >> "$2.objDSH"
+}
+
+createOBJDSH() {
+echo "#$1" > "$2.objDSH"
+echo "$3" >> "$4.objDSH"
+cat "$2" "$4" > "$5"
+}
+
+openOBJDSH(){
+eval "cat '$1'"
+}
+
+openallOBJDSH() {
+cat *.objDSH
+}
+
+delallOBJDSH() {
+rm *.objDSH
+}
+
+comitOBJDSH() {
+oldfilecomit=$(cat "$2")
+echo "$1" >> "$2.objDSH"
+eval ". $2.objDSH"
+printf "release comit(Y/n):"
+read choisecomit
+if [ "$choisecomit" = "Y" ] ; then
+printf ""
+else
+printf "$oldfilecomit" > "$2"
+fi
+unset choisecomit
+unset oldfilecomit
+}
+
+rewriteOBJDSH() {
+cat "$1.objDSH" > "$2.sh"
+rm "$1.objDSH"
+}
+
+loadOBJDSH() {
+cat "$1.sh" > "$2.objDSH"
+rm "$1.sh"
+}
+
+createART() {
+printf "echo '%s'" "$1" > "$2.sh"
+eval "sh '$2.sh'"
+}
+
+sREPL "RANDOM"
