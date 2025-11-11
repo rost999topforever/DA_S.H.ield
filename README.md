@@ -99,6 +99,7 @@ while [ "$foredSTART" -le "$foredEND" ]; do
 eval "$3"
 foredSTART=$(( $foredSTART + 1))
 done
+unset foredSTART foredEND
 }
 
 Exoses() {
@@ -108,6 +109,7 @@ while [ "$exosesSTART" -le "$exosesEND" ]; do
 printf "%s\n" "$3"
 exosesSTART=$(( $exosesSTART + 1))
 done
+unset exosesSTART exosesEND
 }
 
 class() {
@@ -181,9 +183,12 @@ echo "_     ###       _"
 echo "_      #        _"
 echo "----------------"
 echo "DA_S.H.ield GPL 3.0"
+echo "made with <3"
 }
 
 sREPL() {
+trap "" INT TERM
+echo "DA_S.H.ield with <3 by Rost999 ~~>"
 while true ; do
 eval "$1=$(( $(date +%s) % $$))" 2>/dev/null || eval "RANDOM=$(( $(date +%s) % $$))"
 if [ $DASHELDPROMPT = 0 ] ; then
@@ -271,7 +276,7 @@ eval "$1" &
 }
 
 spy2() {
-eval "$1" && eval "$3" &
+eval "$1" && eval "$2" &
 }
 
 spy3() {
@@ -313,6 +318,7 @@ while [ "$stepsSTART" -le "$stepsEND" ]; do
 eval "$3=\$(( \$$3 * $4 ))"
 stepsSTART=$(( $stepsSTART + 1))
 done
+unset stepsSTART stepsEND
 }
 
 spy4() {
@@ -487,7 +493,8 @@ while true ; do
 printf "Y/n:"
 read YNvar
 if [ "$YNvar" = "Y" ] ; then
-continue
+break
+return 0
 else
 break
 fi
@@ -496,10 +503,8 @@ unset YNvar
 }
 
 compil() {
-eval "$( cat '$1' )"
+eval "$( cat $1 )"
 }
-
-
 
 road() {
 timeRoad=$1
@@ -605,6 +610,151 @@ rm "$1.sh"
 createART() {
 printf "echo '%s'" "$1" > "$2.sh"
 eval "sh '$2.sh'"
+}
+
+filered() {
+while true ; do
+ls 
+read fileredvar
+if [ "$fileredvar" = "*" ] ; then
+read fileredvarp
+read fileredvarf
+eval "$fileredvarf *.$fileredvarp"
+elif [ "$fileredvar" = "exit" ] ; then
+break
+else
+eval "$fileredvar"
+fi 
+done
+unset fileredvar fileredvarp fileredvarf
+}
+
+twostar() {
+eval "$1=$(( $2 * $2 ))"
+}
+
+calcmode() {
+while true ; do
+read calcs
+read calcss
+read calcsss
+echo "$(( $calcs $calcss $calcsss ))"
+if [ "$calcs" = "exit" ] || [ "$calcsss" = "exit" ] || [ "$calcss" = "exit" ]; then
+exit
+fi
+done
+unset calcs calcss calcsss
+}
+
+DSHEILDMAN() {
+echo "1. counted
+2. RANDSTART
+3. RANDOMname
+4. evl
+5. constant
+6. Exo
+7. exo
+8. massexo
+9. massfored
+10. reader
+11. mass
+12. varP
+13. varM
+14. fored
+15. Exoses
+16. class
+17. fif
+18. COPY
+19. COntinued
+20. wh
+21. traped
+22. md
+23. readp
+24. prog
+25. proger
+26. print
+27. reprint
+28. DA_SHield
+29. sREPL
+30. trapERR
+31. SMALLslp
+32. smallPrompt
+33. longPrompt
+34. math
+35. reseted
+36. or
+37. slp
+38. BIGslp
+39. stop
+40. moreexo
+41. moreExo
+42. exoPWD
+43. exoPID
+44. spy
+45. spy2
+46. spy3
+47. jmp
+48. udel
+49. cased
+50. steps
+51. spy4
+52. func
+53. nostar
+54. frd
+55. gp
+56. star
+57. qt
+58. FI
+59. Cexo
+60. Cprint
+61. Creadp
+62. shBANG
+63. pmc
+64. var
+65. PIPE
+66. NOPIPE
+67. RUN
+68. DOit
+69. GoTo
+70. and
+71. ge
+72. gt
+73. le
+74. lt
+75. equal
+76. anonim
+77. isfile
+78. isdir
+79. spyRun
+80. chIFS
+81. merge
+82. paint
+83. Yn
+84. compil
+85. road
+86. savetime
+87. stonewrite
+88. me
+89. oldvar
+90. prinTAR
+91. roast
+92. unroast
+93. sprint
+94. objected
+95. coded
+96. createOBJDSH
+97. openOBJDSH
+98. openallOBJDSH
+99. delallOBJDSH
+100. comitOBJDSH
+101. rewriteOBJDSH
+102. loadOBJDSH
+103. createART
+104. filered
+105. twostar
+106. calcmode
+107. sREPL
+108. DSHEILDMAN"
 }
 
 sREPL "RANDOM"
