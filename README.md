@@ -113,12 +113,17 @@ unset exosesSTART exosesEND
 }
 
 class() {
-eval "$1"
-shift 
-while [ $# -ge 2 ]; do
-eval "$1() { $2 }"
+eval "classname=$1"
+if [ "$2" = "args" ] ; then
+shift 1
+eval "$2"
+fi
+shift 1
+while [ $# -gt 0 ] ; do
+eval "$classname\_$1() { $2 }"
 shift 2
 done
+unset classname
 }
 
 fif() {
@@ -175,12 +180,13 @@ printf "%s" "$1" > $2
 DA_SHield() {
 echo "DA_S.H.ield by Rost999"
 echo "_ --------------_"
-echo "_  ##  ##  ##   _"
-echo "_  ####@#####   _"
-echo "_   ##@@@##     _"
-echo "_    ##@##      _"
-echo "_     ###       _"
-echo "_      #        _"
+echo "_   ^^  ^^  ^^  _"
+echo "_   ##  ##  ##  _"
+echo "_  ############ _"
+echo "_   #<@^@^@>#   _"
+echo "_    #######    _"
+echo "_      ###      _"
+echo "_       #       _"
 echo "----------------"
 echo "DA_S.H.ield GPL 3.0"
 echo "made with <3"
@@ -646,6 +652,10 @@ done
 unset calcs calcss calcsss
 }
 
+exitterm() {
+eval "sh"
+}
+
 DSHEILDMAN() {
 echo "1. counted
 2. RANDSTART
@@ -754,7 +764,26 @@ echo "1. counted
 105. twostar
 106. calcmode
 107. sREPL
-108. DSHEILDMAN"
+108. DSHEILDMAN
+109.setframe
+110. startinfinitywh
+111. exitterm"
+}
+
+
+setframe() {
+while [ $# -gt 0 ] ; do
+echo "$1"
+sleep $2 2>/dev/null || sleep 0.5
+shift 2 
+clear
+done
+}
+
+startinfinitywh() {
+while true ; do
+eval "$1"
+done
 }
 
 sREPL "RANDOM"
