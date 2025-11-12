@@ -120,7 +120,9 @@ eval "$2"
 fi
 shift 1
 while [ $# -gt 0 ] ; do
-eval "$classname\_$1() { $2 }"
+eval "${classname}_$1() {
+$2;
+}"
 shift 2
 done
 unset classname
