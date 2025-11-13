@@ -776,7 +776,7 @@ echo "1. counted
 118. spy6
 119. def
 120. sell
-121. tastfull"
+121. testfull"
 }
 
 deco() {
