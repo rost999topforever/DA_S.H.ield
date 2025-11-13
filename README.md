@@ -81,7 +81,7 @@ done
 }
 
 mass() {
-set -- $1
+set -- "$1"
 }
 
 varP() {
@@ -233,7 +233,7 @@ eval "echo $(( $1 $2 $3 ))"
 }
 
 reseted() {
-set -- ""
+set -- 
 }
 
 or() {
@@ -310,12 +310,9 @@ eval "$5"
 "$6") 
 eval "$7"
 ;;
-"$8")
-eval "$9"
-;;
 *)
-shift
-eval "$9"
+eval "$8"
+;;
 esac
 }
 
@@ -658,7 +655,7 @@ exitterm() {
 eval "sh"
 }
 
-DSHEILDMAN() {
+DSHIELDMAN() {
 echo "1. counted
 2. RANDSTART
 3. RANDOMname
@@ -766,12 +763,70 @@ echo "1. counted
 105. twostar
 106. calcmode
 107. sREPL
-108. DSHEILDMAN
+108. DSHIELDMAN
 109.setframe
 110. startinfinitywh
-111. exitterm"
+111. exitterm
+112. deco
+113. write
+114. GOTOrep
+115. reTRUE
+116. reFALSE
+117. spy5
+118. spy6
+119. def
+120. sell
+121. tastfull"
 }
 
+deco() {
+eval "$1"
+eval "$2"
+eval "$1"
+}
+
+spy5() {
+eval "$1 & | $2 &"
+}
+
+spy6() {
+eval "$1 | $2 || $3"
+}
+
+def() {
+eval "$1() {
+eval '$2'
+$3
+}"
+}
+
+testfull() {
+eval "set -euo pipefail"
+}
+
+reTRUE() {
+return 0
+}
+
+reFALSE() {
+return 1
+}
+
+write() {
+echo "$1"
+[ -f "$2" ] && echo "$1" >> "$2" 2>/dev/null || continue
+}
+
+GOTOrep() {
+while [ $1 -gt 1 ] ; do 
+eval "$2"
+done
+}
+
+sell() {
+eval "$1=$(( $1 + $2 ))"
+eval "unset $2"
+}
 
 setframe() {
 while [ $# -gt 0 ] ; do
