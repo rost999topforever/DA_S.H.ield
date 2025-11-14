@@ -775,8 +775,7 @@ echo "1. counted
 117. spy5
 118. spy6
 119. def
-120. sell
-121. testfull"
+120. sell"
 }
 
 deco() {
@@ -786,7 +785,7 @@ eval "$1"
 }
 
 spy5() {
-eval "$1 & | $2 &"
+eval "{ $1 | $2; } &"
 }
 
 spy6() {
@@ -800,9 +799,6 @@ $3
 }"
 }
 
-testfull() {
-eval "set -euo pipefail"
-}
 
 reTRUE() {
 return 0
@@ -814,13 +810,16 @@ return 1
 
 write() {
 echo "$1"
-[ -f "$2" ] && echo "$1" >> "$2" 2>/dev/null || continue
+[ -f "$2" ] && echo "$1" >> "$2" 2>/dev/null || true
 }
 
 GOTOrep() {
-while [ $1 -gt 1 ] ; do 
+eval "GOTOr=$1"
+while [ $GOTOr -gt 1 ] ; do 
 eval "$2"
+GOTOr=$(( $GOTOr - 1 ))
 done
+unset GOTOr
 }
 
 sell() {
