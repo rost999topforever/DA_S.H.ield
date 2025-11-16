@@ -114,11 +114,12 @@ unset exosesSTART exosesEND
 
 class() {
 eval "classname=$1"
-if [ "$2" = "args" ] ; then
 shift 1
-eval "$2"
+if [ "$1" = "args" ] ; then
+shift 1
+eval "$1"
+shift 1
 fi
-shift 1
 while [ $# -gt 0 ] ; do
 eval "${classname}_$1() {
 $2;
