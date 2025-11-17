@@ -114,17 +114,18 @@ unset exosesSTART exosesEND
 
 class() {
 eval "classname=$1"
-shift 1
+shift 
 if [ "$1" = "args" ] ; then
-shift 1
+shift 
 eval "$1"
-shift 1
+shift 
 fi
 while [ $# -gt 0 ] ; do
 eval "${classname}_$1() {
 $2;
 }"
-shift 2
+shift 
+shift
 done
 unset classname
 }
@@ -200,6 +201,7 @@ trap "" INT TERM
 echo "DA_S.H.ield with <3 by Rost999 ~~>"
 while true ; do
 eval "$1=$(( $(date +%s) % $$))" 2>/dev/null || eval "RANDOM=$(( $(date +%s) % $$))"
+eval "$2=$(( $(( $(date +%s) % $$ )) * $(( $(date +%s) % $$ )) ))" 2>/dev/null || eval "nutRANDOM=$(( $(( $(date +%s) % $$ )) * $(( $(date +%s) % $$ )) ))"
 if [ $DASHELDPROMPT = 0 ] ; then
 DAshieldprompt="$( basename $PWD )"
 else
@@ -480,7 +482,9 @@ unset NIFS OLDIFS
 merge() {
 while [ $# -gt 0 ] ; do
 eval "$1='$2$3'"
-shift 3
+shift 
+shift
+shift
 done
 }
 
@@ -558,7 +562,15 @@ eval "$1=$(( $3 / 2 )) && $2=$(( $3 / 2 )) || $1='$3' && $2='$3'"
 sprint() {
 while [ $# -gt 0 ] ; do
 eval "$1;$2;$3;$4;$5;$6;$7;$8;$9"
-shift 9
+shift 
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift
 done
 }
 
@@ -776,7 +788,13 @@ echo "1. counted
 117. spy5
 118. spy6
 119. def
-120. sell"
+120. sell
+121. moretest
+123. nutRANDOM
+124. nutRANDOMname
+125. decofunc
+126. shf
+127. turtle"
 }
 
 deco() {
@@ -832,7 +850,8 @@ setframe() {
 while [ $# -gt 0 ] ; do
 echo "$1"
 sleep $2 2>/dev/null || sleep 0.5
-shift 2 
+shift 
+shift
 clear
 done
 }
@@ -843,4 +862,53 @@ eval "$1"
 done
 }
 
-sREPL "RANDOM"
+meretest() {
+eval "mtestDASH=$1"
+while [ $mtestDASH -ge 1 ] ; do
+eval ". $2" &
+mtestDASH=$(( $mtestDASH - 1 ))
+done
+unset mtestDASH
+}
+
+nutRANDOMname() {
+eval "$1=$(( $(( $(date +%s) % $$ )) * $(( $(date +%s) % $$ )) ))"
+}
+
+nutRANDOM() {
+eval "RANDOM=$(( $(( $(date +%s) % $$ )) * $(( $(date +%s) % $$ )) ))"
+}
+
+shf() {
+eval "shfvar=$1"
+while [ $shfvar -gt 0 ] ; do
+shift
+shfvar=$(( $shfvar - 1 ))
+done
+unset shfvar
+}
+
+turtle() {
+eval "counterturtle=$2"
+if [ "$1" = "|" ] || [ "$1" = "+" ]; then
+while [ $counterturtle -gt 0 ]; do
+printf "$3" 2>/dev/null || printf "#"
+done
+fi
+if [ "$1" = "-" ]; then
+while [ $counterturtle -gt 0 ]; do
+printf "$3 \n" 2>/dev/null || printf "# \n"
+done
+fi
+unset counterturtle
+}
+
+decofunc() {
+eval "$1() { eval '$2'
+eval '$3'
+eval '$2'
+}"
+}
+
+
+sREPL "RANDOM" "nutRANDOM"
