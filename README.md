@@ -1,3 +1,4 @@
+
 #!/bin/sh
 
 DAshieldprompt="$( basename $PWD )"
@@ -668,134 +669,7 @@ exitterm() {
 eval "sh"
 }
 
-DSHIELDMAN() {
-echo "1. counted
-2. RANDSTART
-3. RANDOMname
-4. evl
-5. constant
-6. Exo
-7. exo
-8. massexo
-9. massfored
-10. reader
-11. mass
-12. varP
-13. varM
-14. fored
-15. Exoses
-16. class
-17. fif
-18. COPY
-19. COntinued
-20. wh
-21. traped
-22. md
-23. readp
-24. prog
-25. proger
-26. print
-27. reprint
-28. DA_SHield
-29. sREPL
-30. trapERR
-31. SMALLslp
-32. smallPrompt
-33. longPrompt
-34. math
-35. reseted
-36. or
-37. slp
-38. BIGslp
-39. stop
-40. moreexo
-41. moreExo
-42. exoPWD
-43. exoPID
-44. spy
-45. spy2
-46. spy3
-47. jmp
-48. udel
-49. cased
-50. steps
-51. spy4
-52. func
-53. nostar
-54. frd
-55. gp
-56. star
-57. qt
-58. FI
-59. Cexo
-60. Cprint
-61. Creadp
-62. shBANG
-63. pmc
-64. var
-65. PIPE
-66. NOPIPE
-67. RUN
-68. DOit
-69. GoTo
-70. and
-71. ge
-72. gt
-73. le
-74. lt
-75. equal
-76. anonim
-77. isfile
-78. isdir
-79. spyRun
-80. chIFS
-81. merge
-82. paint
-83. Yn
-84. compil
-85. road
-86. savetime
-87. stonewrite
-88. me
-89. oldvar
-90. prinTAR
-91. roast
-92. unroast
-93. sprint
-94. objected
-95. coded
-96. createOBJDSH
-97. openOBJDSH
-98. openallOBJDSH
-99. delallOBJDSH
-100. comitOBJDSH
-101. rewriteOBJDSH
-102. loadOBJDSH
-103. createART
-104. filered
-105. twostar
-106. calcmode
-107. sREPL
-108. DSHIELDMAN
-109.setframe
-110. startinfinitywh
-111. exitterm
-112. deco
-113. write
-114. GOTOrep
-115. reTRUE
-116. reFALSE
-117. spy5
-118. spy6
-119. def
-120. sell
-121. moretest
-123. nutRANDOM
-124. nutRANDOMname
-125. decofunc
-126. shf
-127. turtle"
-}
+
 
 deco() {
 eval "$1"
@@ -818,6 +692,136 @@ $3
 }"
 }
 
+DSHIELDMAN() {
+echo "=== DA_S.H.ield ==="
+echo "1. counted START END"
+echo "2. RANDSTART" 
+echo "3. RANDOMname VARNAME"
+echo "4. evl COMMAND"
+echo "5. constant VAR VALUE SECONDS"
+echo "6. Exo TEXT"
+echo "7. exo TEXT"
+echo "8. massexo VARS INDEX"
+echo "9. massfored 'COMMANDS'"
+echo "10. reader"
+echo "11. mass VAR"
+echo "12. varP VAR"
+echo "13. varM VAR"
+echo "14. fored START END 'COMMAND'"
+echo "15. Exoses START END TEXT"
+echo "16. class NAME [args VARS] FUNC1 CODE1 FUNC2 CODE2..."
+echo "17. fif 'COND' 'THEN' 'ELSE'"
+echo "18. COPY FILE1 FILE2"
+echo "19. COntinued FILE1 FILE2"
+echo "20. wh 'COND' 'CMD'"
+echo "21. traped"
+echo "22. md DIR"
+echo "23. readp PROMPT VAR"
+echo "24. prog TEXT FILE"
+echo "25. proger TEXT FILE"
+echo "26. print TEXT FILE"
+echo "27. reprint TEXT FILE"
+echo "28. DA_SHield"
+echo "29. sREPL RAND_VAR1 RAND_VAR2"
+echo "30. trapERR COMMAND"
+echo "31. SMALLslp SECONDS"
+echo "32. smallPrompt"
+echo "33. longPrompt"
+echo "34. math NUM1 OPERATOR NUM2"
+echo "35. reseted"
+echo "36. or CMD1 CMD2"
+echo "37. slp SECONDS"
+echo "38. BIGslp SECONDS"
+echo "39. stop"
+echo "40. moreexo COUNT TEXT"
+echo "41. moreExo COUNT TEXT"
+echo "42. exoPWD"
+echo "43. exoPID"
+echo "44. spy COMMAND"
+echo "45. spy2 CMD1 CMD2"
+echo "46. spy3 CMD1 CMD2"
+echo "47. jmp VAR VALUE"
+echo "48. udel VAR"
+echo "49. cased VALUE CASE1 CMD1 CASE2 CMD2 CASE3 CMD3 DEFAULT_CMD"
+echo "50. steps START END VAR MULTIPLIER"
+echo "51. spy4 CMD1 CMD2"
+echo "52. func NAME CODE"
+echo "53. nostar"
+echo "54. frd FILE"
+echo "55. gp PATTERN FILE"
+echo "56. star EXT"
+echo "57. qt"
+echo "58. FI PATTERN"
+echo "59. Cexo COLOR TEXT"
+echo "60. Cprint COLOR TEXT"
+echo "61. Creadp COLOR PROMPT VAR"
+echo "62. shBANG FILE"
+echo "63. pmc VAR NUM1 OPERATOR NUM2"
+echo "64. var VAR VALUE"
+echo "65. PIPE 'CMD1;CMD2;...'"
+echo "66. NOPIPE 'CMD1;CMD2;...'"
+echo "67. RUN FILE"
+echo "68. DOit FILE"
+echo "69. GoTo DIR"
+echo "70. and CMD1 CMD2"
+echo "71. ge NUM1 NUM2"
+echo "72. gt NUM1 NUM2"
+echo "73. le NUM1 NUM2"
+echo "74. lt NUM1 NUM2"
+echo "75. equal VAL1 VAL2"
+echo "76. anonim FILE PASSWORD"
+echo "77. isfile FILE"
+echo "78. isdir DIR"
+echo "79. spyRun FILE"
+echo "80. chIFS CHAR SECONDS"
+echo "81. merge VAR1 VAL1 VAL2 VAR2 VAL3 VAL4..."
+echo "82. paint"
+echo "83. Yn"
+echo "84. compil FILE"
+echo "85. road TIME CMD1 CMD2..."
+echo "86. savetime VAR"
+echo "87. stonewrite TEXT FILE"
+echo "88. me"
+echo "89. oldvar VAR VALUE SECONDS"
+echo "90. prinTAR FILE1 FILE2 FILE3"
+echo "91. roast VAL1 VAL2 VAR"
+echo "92. unroast VAR1 VAR2 VAL"
+echo "93. sprint CMD1 CMD2 CMD3 CMD4 CMD5 CMD6 CMD7 CMD8 CMD9..."
+echo "94. objected NAME FILE"
+echo "95. coded CODE FILE"
+echo "96. createOBJDSH NAME FILE1 CODE FILE2 OUTPUT"
+echo "97. openOBJDSH FILE"
+echo "98. openallOBJDSH"
+echo "99. delallOBJDSH"
+echo "100. comitOBJDSH CODE FILE"
+echo "101. rewriteOBJDSH FILE1 FILE2"
+echo "102. loadOBJDSH FILE1 FILE2"
+echo "103. createART TEXT FILE"
+echo "104. filered"
+echo "105. twostar VAR NUM"
+echo "106. calcmode"
+echo "107. sREPL RAND_VAR1 RAND_VAR2"
+echo "108. DSHIELDMAN"
+echo "109. setframe TEXT1 TIME1 TEXT2 TIME2..."
+echo "110. startinfinitywh COMMAND"
+echo "111. exitterm"
+echo "112. deco CMD1 CMD2"
+echo "113. write TEXT [FILE]"
+echo "114. GOTOrep COUNT COMMAND"
+echo "115. reTRUE"
+echo "116. reFALSE"
+echo "117. spy5 CMD1 CMD2"
+echo "118. spy6 CMD1 CMD2 CMD3"
+echo "119. def NAME CODE1 CODE2"
+echo "120. sell VAR1 VAR2"
+echo "121. moretest COUNT FILE"
+echo "123. nutRANDOM"
+echo "124. nutRANDOMname VAR"
+echo "125. decofunc NAME CODE1 CODE2"
+echo "126. shf COUNT"
+echo "127. turtle CHAR COUNT [TEXT]"
+echo "128. renameindir DIR EXT PREFIX"
+}
 
 reTRUE() {
 return 0
@@ -908,6 +912,17 @@ eval "$1() { eval '$2'
 eval '$3'
 eval '$2'
 }"
+}
+
+renameindir() {
+cd "$1"
+ls *."$2" | while read indexdirrenamefile ; do
+eval "$3=$(cat "$indexdirrenamefile")"
+rm "$indexdirrenamefile"
+echo "$3" > "$4_$indexdirrenamefile"
+echo "$4_$indexdirrenamefile"
+done
+unset indexdirrenamefile
 }
 
 
